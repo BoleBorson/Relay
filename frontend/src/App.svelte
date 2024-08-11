@@ -1,13 +1,23 @@
 <script>
   import logo from './assets/images/logo-universal.png'
   import {Greet} from '../wailsjs/go/main/App.js'
+  import {main} from "../wailsjs/go/models"
 
   let resultText = "Please enter your name below 👇"
   let name
 
-  function greet() {
-    Greet(name).then(result => resultText = result)
+  function generate() {
+    let person = new main.Person()
+    person.name = "Peter"
+    person.age = 27
+    Greet(person).then((result) => {
+      console.log(result);
+    });
   }
+
+  // function greet() {
+  //   Greet(name).then(result => resultText = result)
+  // }
 </script>
 
 <main>
@@ -15,7 +25,7 @@
   <div class="result" id="result">{resultText}</div>
   <div class="input-box" id="input">
     <input autocomplete="off" bind:value={name} class="input" id="name" type="text"/>
-    <button class="btn" on:click={greet}>Greet</button>
+    <button class="btn" on:click={generate}>Greet</button>
   </div>
 </main>
 
